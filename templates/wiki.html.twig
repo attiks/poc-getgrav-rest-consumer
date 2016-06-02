@@ -1,0 +1,16 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+  <table>
+    <tr>
+      <th>Nid</th>
+      <th>Component</th>
+    </tr>
+    <tr>
+      <td>{{ nid }}</td>
+      <td>{{ component }}</td>
+  </table>
+
+  {{ content }}
+{% endblock %}

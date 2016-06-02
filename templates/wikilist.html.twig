@@ -1,0 +1,14 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+  <h2>All issues</h2>
+
+  <ul>
+  {% for issue in issues %}
+    <li><a href="/random/{{ issue.nid}}">{{ issue.title}}</a></li>
+  {% endfor %}
+  </ul>
+
+  {{ content }}
+{% endblock %}

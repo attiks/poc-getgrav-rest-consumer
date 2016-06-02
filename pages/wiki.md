@@ -1,0 +1,4 @@
+---
+title: Wiki page
+---
+Tekst
