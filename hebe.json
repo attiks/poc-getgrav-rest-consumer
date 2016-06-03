@@ -1,12 +1,12 @@
 {
-   "project":"grav-plugin-random",
+   "project":"poc-getgrav-rest-consumer",
    "platforms":{
       "grav":{
          "nodes":{
             "plugin":[
                {
                   "source":"/",
-                  "destination":"/user/plugins/random"
+                  "destination":"/user/plugins/poc-getgrav-rest-consumer"
                }
             ]
          }

@@ -1,15 +1,15 @@
-name: Random
-version: 1.5.0
-description: Allows to randomly select a page from a collection of pages. Flexible **filters** provide maximum reconfigurability.
+name: POC GetGrav Rest Consumer
+version: 0.0.1
+description: Fetches issues from drupal.org.
 icon: refresh
 author:
-  name: Team Grav
-  email: devs@getgrav.org
-  url: http://getgrav.org
-homepage: https://github.com/getgrav/grav-plugin-random
-demo: http://demo.getgrav.org/blog-skeleton
-keywords: random, plugin, blog, pages
-bugs: https://github.com/getgrav/grav-plugin-random/issues
+  name: Attiks
+  email: peter@attiks.com
+  url: https://attiks.com
+homepage: https://github.com/attiks/poc-getgrav-rest-consumer
+demo:
+keywords: plugin, rest
+bugs: https://github.com/attiks/poc-getgrav-rest-consumer/issues
 license: MIT
 
 form:
@@ -26,37 +26,15 @@ form:
       validate:
         type: bool
 
-    route:
+    project_nid:
+      type: integer
+      label: Project nid
+      default: 2721905
+      help: Drupal project node id
+
+    route_issue:
       type: text
       size: medium
       label: Route
-      default: /random
-      help: Default route of the random plugin
-
-    redirect:
-      type: toggle
-      label: Redirect
-      highlight: 1
-      default: 1
-      options:
-        1: Enabled
-        0: Disabled
-      validate:
-        type: bool
-
-    filters.category:
-      type: selectize
-      label: Category filter
-      help: Comma separated list of category names
-      validate:
-        type: commalist
-
-    filter_combinator:
-      type: select
-      size: medium
-      classes: fancy
-      label: Filter Combinator
-      default: and
-      options:
-        and: And - Boolean &&
-        or: Or - Boolean ||
+      default: /issue
+      help: Default route

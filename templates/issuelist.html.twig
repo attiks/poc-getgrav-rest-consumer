@@ -4,11 +4,12 @@
 
   <h2>All issues</h2>
 
+  {{ content }}
+
   <ul>
   {% for issue in issues %}
-    <li><a href="/random/{{ issue.nid}}">{{ issue.title}}</a></li>
+    <li><a href="{{ issue_base_url }}/{{ issue.nid}}">{{ issue.title}}</a></li>
   {% endfor %}
   </ul>
 
-  {{ content }}
 {% endblock %}
