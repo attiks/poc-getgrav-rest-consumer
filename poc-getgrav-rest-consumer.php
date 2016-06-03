@@ -136,6 +136,8 @@ class PocGetgravRestConsumerPlugin extends Plugin
       /** @var Cache $cache */
       $cache = $this->grav['cache'];
 
+      $cache_ttl = $this->config->get('plugins.poc-getgrav-rest-consumer.cache_ttl');
+
       /** @var Debugger $debugger */
       $debugger = $this->grav['debugger'];
 
@@ -147,7 +149,7 @@ class PocGetgravRestConsumerPlugin extends Plugin
         $debugger->addMessage("Fetching issue data.");
         $result = Response::get($url);
         $content = json_decode($result, true);
-        $cache->save($cache_id, $content);
+        $cache->save($cache_id, $content, $cache_ttl);
       }
       return $content;
     }
@@ -160,6 +162,7 @@ class PocGetgravRestConsumerPlugin extends Plugin
       $debugger = $this->grav['debugger'];
 
       $project_nid = $this->config->get('plugins.poc-getgrav-rest-consumer.project_nid');
+      $cache_ttl = $this->config->get('plugins.poc-getgrav-rest-consumer.cache_ttl');
 
       $url ='https://www.drupal.org/api-d7/node.json?type=project_issue&field_project=' . $project_nid;
       $cache_id = md5('poc-getgrav-rest-consumer' . $url);
@@ -176,7 +179,7 @@ class PocGetgravRestConsumerPlugin extends Plugin
             'title' => $issue['title'],
           ];
         }
-        $cache->save($cache_id, $issues);
+        $cache->save($cache_id, $issues, $cache_ttl);
       }
       return $issues;
     }

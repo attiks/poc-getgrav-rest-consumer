@@ -38,3 +38,9 @@ form:
       label: Route
       default: /issue
       help: Default route
+
+    cache_ttl:
+      type: integer
+      label: Cache lifetime in seconds
+      default: 3600
+      help: Cache lifetime in seconds
