@@ -42,9 +42,6 @@ class PocGetgravRestConsumerPlugin extends Plugin
         /** @var Uri $uri */
         $uri = $this->grav['uri'];
         $route = $this->config->get('plugins.poc-getgrav-rest-consumer.route_issue');
-        if (empty($route)) {
-          $route = '/issue';
-        }
 
         if ($route && strpos($uri->path(), $route) !== FALSE) {
             $this->enable([
