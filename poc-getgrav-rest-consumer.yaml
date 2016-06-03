@@ -2,3 +2,17 @@ enabled: true
 route_issue: /issue
 project_nid: 2721905
 cache_ttl: 3600
+status:
+  1: active
+  2: fixed
+  3: closed (duplicate)
+  4: postponed
+  5: closed (won't fix)
+  6: closed (works as designed)
+  7: closed (fixed)
+  8: needs review
+  13: needs work
+  14: reviewed & tested by the community
+  15: patch (to be ported)
+  16: postponed (maintainer needs more info)
+  18: closed (cannot reproduce)

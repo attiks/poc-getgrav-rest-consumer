@@ -106,9 +106,17 @@ class PocGetgravRestConsumerPlugin extends Plugin
         $page = $this->grav['page'];
         $page->title('Issues');
         $page->modifyHeader('title', 'Issues');
+
+        $status_filter = null;
+        if (isset($_REQUEST['status']) && is_numeric($_REQUEST['status'])) {
+          $status_filter = $_REQUEST['status'];
+        }
+
         $twig = $this->grav['twig'];
-        $twig->twig_vars['issues'] = $this->getIssueList();
+        $twig->twig_vars['issues'] = $this->getIssueList($status_filter);
         $twig->twig_vars['issue_base_url'] = $route;
+        $twig->twig_vars['status_list'] = $this->getActiveStatusList();
+        $twig->twig_vars['status_filter_active'] = $status_filter;
       }
       else {
         $content = $this->getIssue($nid);
@@ -122,9 +130,25 @@ class PocGetgravRestConsumerPlugin extends Plugin
 
         $twig = $this->grav['twig'];
         $twig->twig_vars['component'] = $content['field_issue_component'];
+        $twig->twig_vars['status'] = $this->getStatusLabel($content['field_issue_status']);
         $twig->twig_vars['nid'] = $nid;
         $twig->twig_vars['issue_base_url'] = $route;
       }
+    }
+
+    private function getStatusLabel($id) {
+      $statusLabels = $this->config->get('plugins.poc-getgrav-rest-consumer.status');
+      return $statusLabels[$id];
+    }
+
+    private function getActiveStatusList() {
+      $issues = $this->getIssueList();
+      $status = array_column($issues, 'status');
+      $status = array_unique($status);
+      $status = array_flip($status);
+
+      $statusLabels = $this->config->get('plugins.poc-getgrav-rest-consumer.status');
+      return array_intersect_key($statusLabels, $status);
     }
 
     private function validNid($nid) {
@@ -154,7 +178,7 @@ class PocGetgravRestConsumerPlugin extends Plugin
       return $content;
     }
 
-    private function getIssueList() {
+    private function getIssueList($status = null) {
       /** @var Cache $cache */
       $cache = $this->grav['cache'];
 
@@ -177,9 +201,17 @@ class PocGetgravRestConsumerPlugin extends Plugin
           $issues[$issue['nid']] = [
             'nid' => $issue['nid'],
             'title' => $issue['title'],
+            'status' => $issue['field_issue_status'],
           ];
         }
         $cache->save($cache_id, $issues, $cache_ttl);
+      }
+
+      // Filter on status.
+      if ($status) {
+        $issues = array_filter($issues, function ($val) use ($status) {
+          return $val['status'] == $status;
+        });
       }
       return $issues;
     }

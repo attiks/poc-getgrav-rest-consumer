@@ -6,9 +6,22 @@
 
   {{ content }}
 
+  <div>
+    <ul>
+      <li><a href="{{ issue_base_url }}">All</a></li>
+      {% for key, status in status_list %}
+        {% if (key == status_filter_active) %}
+          <li><a class="active" href="{{ issue_base_url }}?status={{ key }}">{{ status }}</a></li>
+        {% else %}
+          <li><a href="{{ issue_base_url }}?status={{ key }}">{{ status }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
   <ul>
   {% for issue in issues %}
-    <li><a href="{{ issue_base_url }}/{{ issue.nid}}">{{ issue.title}}</a></li>
+    <li><a href="{{ issue_base_url }}/{{ issue.nid }}">{{ issue.title }}</a></li>
   {% endfor %}
   </ul>
 
