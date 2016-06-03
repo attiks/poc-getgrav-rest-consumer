@@ -14,7 +14,7 @@ Clone or download, but rename to random for now.
 
     route: /random
 
-# Quick tested
+# Quick test
 
 ```
 wget https://github.com/getgrav/grav/releases/download/1.1.0-rc.1/grav-v1.1.0-rc.1.zip
