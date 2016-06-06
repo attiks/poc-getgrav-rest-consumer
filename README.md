@@ -4,15 +4,17 @@
 
 # Installation
 
-Clone or download, but rename to random for now.
+Clone or download and enable the plugin.
 
 # Usage
 
-`Rest API Consumer` creates a **route** *random*.
+`Rest API Consumer` creates a **route** *issue*.
 
 # Settings Defaults
 
-    route: /random
+    route: /issue
+    project_nid: 2721905
+    cache_ttl: 3600
 
 # Quick test
 
